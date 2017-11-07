@@ -41,8 +41,13 @@ public class Invoice {
         this.number = number;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "ITEMS")
+
+    @OneToMany(
+            targetEntity = Item.class,
+            mappedBy = "invoice",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     public List<Item> getItems() {
         return items;
     }
