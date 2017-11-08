@@ -14,13 +14,12 @@ public class Item {
     private BigDecimal price;
     private int quantity;
     private BigDecimal value;
-    private List<Invoice> invoices = new ArrayList<>();
+    private Invoice invoice;
 
     public Item() {
     }
 
-    public Item(int id, Product product, BigDecimal price, int quantity, BigDecimal value) {
-        this.id = id;
+    public Item(Product product, BigDecimal price, int quantity, BigDecimal value) {
         this.product = product;
         this.price = price;
         this.quantity = quantity;
@@ -51,9 +50,11 @@ public class Item {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "INVOICE_ID")
-    public List<Invoice> getInvoice() {
-        return invoices;
+    public Invoice getInvoice() {
+        return invoice;
     }
+
+    public void setInvoice(Invoice invoice) { this.invoice = invoice; }
 
     @Column(name = "PRICE")
     public BigDecimal getPrice() {
@@ -81,4 +82,5 @@ public class Item {
     public void setValue(BigDecimal value) {
         this.value = value;
     }
+
 }

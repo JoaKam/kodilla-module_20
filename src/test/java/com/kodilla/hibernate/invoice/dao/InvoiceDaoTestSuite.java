@@ -22,17 +22,17 @@ public class InvoiceDaoTestSuite {
     @Test
     public void testInvoiceDaoSave() {
         //Given
-        Product prodApple = new Product(1, "Apple");
-        Product prodBanana = new Product(2, "Banana");
-        Product prodOrange = new Product(3, "Orange");
+        Product prodApple = new Product("Apple");
+        Product prodBanana = new Product("Banana");
+        Product prodOrange = new Product("Orange");
 
-        Item itemApple = new Item(5, prodApple, new BigDecimal(5), 4, new BigDecimal(20));
-        Item itemApple2 = new Item(5, prodApple, new BigDecimal(6), 3, new BigDecimal(18));
-        Item itemBanana = new Item(5, prodBanana, new BigDecimal(4), 2, new BigDecimal(8));
-        Item itemOrange = new Item(5, prodOrange, new BigDecimal(3), 1, new BigDecimal(3));
+        Item itemApple = new Item(prodApple, new BigDecimal(5), 4, new BigDecimal(20));
+        Item itemApple2 = new Item(prodApple, new BigDecimal(6), 3, new BigDecimal(18));
+        Item itemBanana = new Item(prodBanana, new BigDecimal(4), 2, new BigDecimal(8));
+        Item itemOrange = new Item(prodOrange, new BigDecimal(3), 1, new BigDecimal(3));
 
-        Invoice invoiceAppleApple2 = new Invoice(0, "1/11/2017", Arrays.asList(itemApple, itemApple2));
-        Invoice invoiceAppleOrangeBanana = new Invoice(2, "1/11/2017", Arrays.asList(itemApple, itemOrange, itemBanana));
+        Invoice invoiceAppleApple2 = new Invoice("1/11/2017", Arrays.asList(itemApple, itemApple2));
+        Invoice invoiceAppleOrangeBanana = new Invoice("1/11/2017", Arrays.asList(itemApple, itemOrange, itemBanana));
 
         prodApple.setItems(Arrays.asList(itemApple, itemApple2));
         prodBanana.setItems(Arrays.asList(itemBanana));
@@ -45,7 +45,7 @@ public class InvoiceDaoTestSuite {
         int idInvAppleOrangeBanana = invoiceAppleOrangeBanana.getId();
 
         //Then
-        Assert.assertNotEquals(0, idInvAppleApple2);
+        Assert.assertNotEquals(1, idInvAppleApple2);
         Assert.assertNotEquals(2, idInvAppleOrangeBanana);
 
         //CleanUp
