@@ -32,7 +32,7 @@ public class InvoiceDaoTestSuite {
         Item itemOrange = new Item(prodOrange, new BigDecimal(3), 1, new BigDecimal(3));
 
         Invoice invoiceAppleApple2 = new Invoice("1/11/2017", Arrays.asList(itemApple, itemApple2));
-        Invoice invoiceAppleOrangeBanana = new Invoice("1/11/2017", Arrays.asList(itemApple, itemOrange, itemBanana));
+        Invoice invoiceOrangeBanana = new Invoice("1/11/2017", Arrays.asList(itemOrange, itemBanana));
 
         prodApple.setItems(Arrays.asList(itemApple, itemApple2));
         prodBanana.setItems(Arrays.asList(itemBanana));
@@ -40,9 +40,9 @@ public class InvoiceDaoTestSuite {
 
         //When
         invoiceDao.save(invoiceAppleApple2);
-        invoiceDao.save(invoiceAppleOrangeBanana);
+        invoiceDao.save(invoiceOrangeBanana);
         int idInvAppleApple2 = invoiceAppleApple2.getId();
-        int idInvAppleOrangeBanana = invoiceAppleOrangeBanana.getId();
+        int idInvAppleOrangeBanana = invoiceOrangeBanana.getId();
 
         //Then
         Assert.assertNotEquals(1, idInvAppleApple2);
