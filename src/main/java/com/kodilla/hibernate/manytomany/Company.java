@@ -5,11 +5,18 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedNativeQuery(
-        name = "Company.retrieveNameBeginningWith",
-        query = "SELECT * FROM COMPANIES WHERE LEFT(COMPANY_NAME,3) = :3FIRSTCHARACTERS",
-        resultClass = Company.class
-)
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = "Company.retrieveNameBeginningWith",
+                query = "SELECT * FROM COMPANIES WHERE LEFT(COMPANY_NAME,3) = :3FIRSTCHARACTERS",
+                resultClass = Company.class
+        ),
+        @NamedNativeQuery(
+                name = "CompanyDto.retrieveNameWith",
+                query = "SELECT * FROM COMPANIES WHERE COMPANY_NAME LIKE :SEARCH_CHAR",
+                resultClass = Company.class
+        )
+})
 
 @Entity
 @Table(name = "COMPANIES")
