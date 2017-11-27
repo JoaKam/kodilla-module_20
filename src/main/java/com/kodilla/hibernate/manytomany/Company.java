@@ -12,7 +12,7 @@ import java.util.List;
                 resultClass = Company.class
         ),
         @NamedNativeQuery(
-                name = "CompanyDto.retrieveNameWith",
+                name = "Company.retrieveNameWith",
                 query = "SELECT * FROM COMPANIES WHERE COMPANY_NAME LIKE :SEARCH_CHAR",
                 resultClass = Company.class
         )

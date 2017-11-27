@@ -11,7 +11,7 @@ import java.util.List;
                 query = "FROM Employee WHERE lastname = :LASTNAME"
         ),
         @NamedQuery(
-                name = "EmployeeDto.retrieveNameWith",
+                name = "Employee.retrieveNameWith",
                 query = "FROM Employee WHERE lastname LIKE :SEARCH_CHAR"
         )
 })
