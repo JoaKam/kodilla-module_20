@@ -6,6 +6,7 @@ import com.kodilla.hibernate.manytomany.dao.CompanyDao;
 import com.kodilla.hibernate.manytomany.dao.EmployeeDao;
 import com.kodilla.hibernate.manytomany.facade.api.SearchFacade;
 import com.kodilla.hibernate.manytomany.facade.api.SearchingException;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,18 +48,42 @@ public class SearchFacadeTestSuite {
         lindaKovalsky.getCompanies().add(dataMaesters);
         lindaKovalsky.getCompanies().add(greyMatter);
 
+        companyDao.save(softwareMachine);
+        int softwareMachineId = softwareMachine.getId();
+        companyDao.save(dataMaesters);
+        int dataMaestersId = dataMaesters.getId();
+        companyDao.save(greyMatter);
+        int greyMatterId = greyMatter.getId();
+
         //When
 
         try {
-            searchFacade.processSearchCompany("%ter%");
+            List<Company> foundCompanies = searchFacade.processSearchCompany("%ter%");
+            Assert.assertEquals(2, foundCompanies.size());
+            //foundCompanies.forEach(company -> System.out.println(company.getName()));
+            Assert.assertTrue(foundCompanies.contains(dataMaesters));
+            Assert.assertTrue(foundCompanies.contains(greyMatter));
         } catch (SearchingException e) {
-
         }
 
-        try {
-            searchFacade.processSearchEmployee("%l%");
-        } catch (SearchingException e) {
 
+        try {
+            List<Employee> foundEmployees = searchFacade.processSearchEmployee("%l%");
+            Assert.assertEquals(2, foundEmployees.size());
+            Assert.assertTrue(foundEmployees.contains(stephanieClarckson));
+            Assert.assertTrue(foundEmployees.contains(lindaKovalsky));
+        } catch (SearchingException e) {
+        }
+
+
+        //CleanUp
+        try {
+            companyDao.delete(softwareMachineId);
+            companyDao.delete(dataMaestersId);
+            companyDao.delete(greyMatterId);
+
+        } catch (Exception e) {
+            //do nothing
         }
     }
 }

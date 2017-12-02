@@ -16,10 +16,10 @@ public class SearchFacade {
     @Autowired
     private EmployeeDao employeeDao;
 
-    public void processSearchCompany(final String charToSearch)
+    public List<Company> processSearchCompany(final String charToSearch)
             throws SearchingException {
 
-        List<Company> selectedCharCompanies = companyDao.retrieveNameWith("%" + charToSearch + "%");
+        List<Company> selectedCharCompanies = companyDao.retrieveNameWith(charToSearch);
 
         if (selectedCharCompanies == null) {
             throw new SearchingException(SearchingException.ERR_COMPANY_NOT_FOUND);
@@ -28,9 +28,10 @@ public class SearchFacade {
                     company -> System.out.println(company));
         }
 
+        return selectedCharCompanies;
     }
 
-    public void processSearchEmployee(final String charToSearch)
+    public List<Employee> processSearchEmployee(final String charToSearch)
             throws SearchingException {
 
         List<Employee> selectedCharEmployees = employeeDao.retrieveNameWith("%" + charToSearch + "%");
@@ -41,5 +42,7 @@ public class SearchFacade {
             selectedCharEmployees.forEach(
                     employee -> System.out.println(employee));
         }
+
+        return selectedCharEmployees;
     }
 }
