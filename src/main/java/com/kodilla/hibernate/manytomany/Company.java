@@ -71,15 +71,13 @@ public class Company {
         Company company = (Company) o;
 
         if (id != company.id) return false;
-        if (name != null ? !name.equals(company.name) : company.name != null) return false;
-        return employees != null ? employees.equals(company.employees) : company.employees == null;
+        return name.equals(company.name);
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (employees != null ? employees.hashCode() : 0);
+        result = 31 * result + name.hashCode();
         return result;
     }
 }
