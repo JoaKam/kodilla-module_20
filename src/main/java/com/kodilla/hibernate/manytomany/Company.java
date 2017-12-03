@@ -62,4 +62,24 @@ public class Company {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Company company = (Company) o;
+
+        if (id != company.id) return false;
+        if (name != null ? !name.equals(company.name) : company.name != null) return false;
+        return employees != null ? employees.equals(company.employees) : company.employees == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (employees != null ? employees.hashCode() : 0);
+        return result;
+    }
 }
